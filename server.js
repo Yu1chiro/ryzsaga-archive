@@ -1,8 +1,5 @@
 const express = require('express');
-const Tesseract = require('tesseract.js');
 const path = require('path');
-const FormData = require('form-data');
-const fetch = require('node-fetch');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -119,22 +116,25 @@ app.post('/verify-image', async (req, res) => {
 
     console.log('Memproses gambar untuk file:', file.title);
 
-    // 🔥 Menggunakan OCR.space API (GRATIS!)
+    // 🔥 Menggunakan OCR.space API dengan URLSearchParams
     const apiKey = 'K85870810288957'; // API key gratis
     
-    const formData = new FormData();
-    formData.append('base64Image', imageData);
-    formData.append('apikey', apiKey);
-    formData.append('language', 'ind'); // Bahasa Indonesia
-    formData.append('isOverlayRequired', false);
-    formData.append('detectOrientation', false);
-    formData.append('scale', true);
-    formData.append('isTable', false);
-    formData.append('OCREngine', 2); // Engine terbaru
+    const params = new URLSearchParams();
+    params.append('base64Image', imageData);
+    params.append('apikey', apiKey);
+    params.append('language', 'ind');
+    params.append('isOverlayRequired', 'false');
+    params.append('detectOrientation', 'false');
+    params.append('scale', 'true');
+    params.append('isTable', 'false');
+    params.append('OCREngine', '2');
 
     const response = await fetch('https://api.ocr.space/parse/image', {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params
     });
 
     const ocrResult = await response.json();
@@ -145,7 +145,7 @@ app.post('/verify-image', async (req, res) => {
       
       const teksHasil = text.toLowerCase();
 
-      // 🔍 Logic verifikasi kamu tetap sama
+      // 🔍 Logic verifikasi tetap sama
       const hasRyzSagaCaps = text.includes('RYZ SAGA');
       const hasPesan = teksHasil.includes('pesan');
       const hasRyzSaga = teksHasil.includes('@ryz') || teksHasil.includes('ryz saga') || teksHasil.includes('ryzsaga');
