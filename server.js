@@ -16,7 +16,7 @@ const pdfFiles = [
     id: 1,
     title: "JLPT N5 Practice Test",
     description: "Terdiri 188 Halaman gabungan dari soal dari tahun 2011-2021",
-    thumbnail: "sources/n5.png",
+    thumbnail: "/img/n5.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=1L4Uxw8dxHD_En-NHBq3zhiwDFI6V2poW",
     category: "N5"
   },
@@ -24,7 +24,7 @@ const pdfFiles = [
     id: 2,
     title: "JLPT N4 Practice Test",
     description: "Terdiri 129 Halaman gabungan soal dari tahun 2012-2023",
-    thumbnail: "sources/n4.png",
+    thumbnail: "/img/n4.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=1SzZr-E7VWJvMwLbk0evOtPmsOwkypqOh",
     category: "N4"
   },
@@ -32,7 +32,7 @@ const pdfFiles = [
     id: 3,
     title: "JLPT N3 Practice Test",
     description: "Coming soon....",
-    thumbnail: "sources/n3.png",
+    thumbnail: "/img/n3.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=COMING_SOON",
     category: "N3"
   },
@@ -40,7 +40,7 @@ const pdfFiles = [
     id: 4,
     title: "Buku Modul Kontruksi",
     description: "Free download",
-    thumbnail: "sources/genba.png",
+    thumbnail: "/img/genba.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=1ILrow21HipX_YGHzAnk6lchWH9PUdeby",
     category: "Genba"
   },
@@ -48,7 +48,7 @@ const pdfFiles = [
     id: 5,
     title: "Buku Modul SSW Pengolahan Makanan",
     description: "Free Download",
-    thumbnail: "sources/makanan.png",
+    thumbnail: "/img/makanan.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=1A66wwXnJXikaDk43ftz5k6qVviStql_w",
     category: "Pengolahan Makanan"
   },
@@ -56,7 +56,7 @@ const pdfFiles = [
     id: 6,
     title: "Kanji Practice Book",
     description: "Buku latihan kanji untuk semua level",
-    thumbnail: "sources/kanji.png",
+    thumbnail: "/img/kanji.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=COMING_SOON",
     category: "Kanji"
   }
