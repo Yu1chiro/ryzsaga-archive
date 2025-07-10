@@ -116,15 +116,15 @@ app.post('/verify-image', async (req, res) => {
 
     console.log('Memproses gambar untuk file:', file.title);
 
-    // 🔥 Menggunakan OCR.space API dengan URLSearchParams
+    // 🔥 Menggunakan OCR.space API dengan parameter yang benar
     const apiKey = 'K85870810288957'; // API key gratis
     
     const params = new URLSearchParams();
     params.append('base64Image', imageData);
     params.append('apikey', apiKey);
-    params.append('language', 'ind');
+    params.append('language', 'eng'); // 🔧 Ganti ke 'eng' (English) - lebih reliable
     params.append('isOverlayRequired', 'false');
-    params.append('detectOrientation', 'false');
+    params.append('detectOrientation', 'true'); // 🔧 Enable untuk rotasi gambar
     params.append('scale', 'true');
     params.append('isTable', 'false');
     params.append('OCREngine', '2');
@@ -138,47 +138,143 @@ app.post('/verify-image', async (req, res) => {
     });
 
     const ocrResult = await response.json();
+    console.log('OCR Result:', ocrResult); // 🔧 Debug log
 
     if (!ocrResult.IsErroredOnProcessing && ocrResult.ParsedResults && ocrResult.ParsedResults.length > 0) {
-      const text = ocrResult.ParsedResults[0].ParsedText;
+      const text = ocrResult.ParsedResults[0].ParsedText || '';
       console.log('Teks yang ditemukan:', text);
       
-      const teksHasil = text.toLowerCase();
+      // 🔍 Normalisasi teks untuk deteksi yang lebih robust
+      const normalizedText = text.toLowerCase()
+        .replace(/[^\w\s@]/g, ' ') // Hapus karakter khusus kecuali @ dan alphanumeric
+        .replace(/\s+/g, ' ')      // Ganti multiple spaces dengan single space
+        .trim();
+      
+      console.log('Normalized text:', normalizedText);
 
-      // 🔍 Logic verifikasi tetap sama
-      const hasRyzSagaCaps = text.includes('RYZ SAGA');
-      const hasPesan = teksHasil.includes('pesan');
-      const hasRyzSaga = teksHasil.includes('@ryz') || teksHasil.includes('ryz saga') || teksHasil.includes('ryzsaga');
+      // 🔧 Logic verifikasi yang lebih flexible
+      const textVariants = [
+        'ryz saga',
+        'ryzsaga', 
+        'ryz_saga',
+        '@ryz',
+        '@ryzsaga',
+        'saga ryz',
+        'sagarz',
+        'ryzaga'
+      ];
 
-      if (hasPesan && hasRyzSaga && hasRyzSagaCaps) {
+      const pesanVariants = [
+        'pesan',
+        'message',
+        'messages',
+        'direct message',
+        'dm',
+        'chat'
+      ];
+
+      // Cek apakah ada varian nama yang terdeteksi
+      const hasRyzSaga = textVariants.some(variant => 
+        normalizedText.includes(variant)
+      );
+
+      // Cek apakah ada indikasi pesan/chat
+      const hasPesan = pesanVariants.some(variant => 
+        normalizedText.includes(variant)
+      );
+
+      // Cek case-sensitive untuk nama yang tepat (opsional)
+      const hasExactName = text.includes('RYZ SAGA') || 
+                          text.includes('Ryz Saga') || 
+                          text.includes('RyzSaga');
+
+      console.log('Detection results:', {
+        hasRyzSaga,
+        hasPesan,
+        hasExactName,
+        detectedVariants: textVariants.filter(v => normalizedText.includes(v))
+      });
+
+      // 🎯 Kondisi verifikasi yang lebih lenient
+      if (hasRyzSaga && (hasPesan || hasExactName)) {
         res.json({
           success: true,
-          message: 'Wah makasi ya sudh support akun ini! Ganbattene!',
+          message: 'Wah makasi ya sudh support akun ini! Ganbattene! 🎉',
           downloadUrl: file.driveUrl,
           fileName: file.title,
-          detectedText: text
+          detectedText: text,
+          detectedVariants: textVariants.filter(v => normalizedText.includes(v))
         });
       } else {
+        // 🔧 Berikan feedback yang lebih informatif
+        let feedbackMessage = 'Oops! ';
+        
+        if (!hasRyzSaga) {
+          feedbackMessage += 'Username @ryzsaga tidak terdeteksi. ';
+        }
+        
+        if (!hasPesan && !hasExactName) {
+          feedbackMessage += 'Screenshot chat/pesan tidak terdeteksi. ';
+        }
+        
+        feedbackMessage += 'Pastikan screenshot menampilkan chat dengan @ryzsaga dengan jelas!';
+
         res.json({
           success: false,
-          message: 'Oops! ternyata kamu belum memfollow atau akun tidak terdeteksi. Yuk follow dahulu!',
-          detectedText: text
+          message: feedbackMessage,
+          detectedText: text,
+          debug: {
+            hasRyzSaga,
+            hasPesan,
+            hasExactName,
+            normalizedText: normalizedText.substring(0, 200) // Limited untuk debug
+          }
         });
       }
 
     } else {
       console.error('OCR Error:', ocrResult);
+      
+      // 🔧 Error handling yang lebih spesifik
+      let errorMessage = 'Gagal memproses gambar. ';
+      
+      if (ocrResult.ErrorMessage) {
+        if (ocrResult.ErrorMessage.includes('language')) {
+          errorMessage += 'Bahasa tidak didukung.';
+        } else if (ocrResult.ErrorMessage.includes('image')) {
+          errorMessage += 'Format gambar tidak valid atau terlalu besar.';
+        } else {
+          errorMessage += ocrResult.ErrorMessage;
+        }
+      } else {
+        errorMessage += 'Pastikan gambar jelas dan berformat yang didukung (JPG, PNG).';
+      }
+
       res.status(500).json({
         success: false,
-        message: 'Gagal memproses gambar: ' + (ocrResult.ErrorMessage || 'Unknown error')
+        message: errorMessage,
+        errorCode: ocrResult.ErrorMessage || 'UNKNOWN_ERROR'
       });
     }
 
   } catch (error) {
     console.error('Error processing image:', error);
+    
+    // 🔧 Error handling yang lebih user-friendly
+    let userMessage = 'Terjadi kesalahan saat memproses gambar. ';
+    
+    if (error.message.includes('fetch')) {
+      userMessage += 'Koneksi ke server OCR gagal.';
+    } else if (error.message.includes('JSON')) {
+      userMessage += 'Response server tidak valid.';
+    } else {
+      userMessage += 'Silakan coba lagi.';
+    }
+
     res.status(500).json({
       success: false,
-      message: 'Terjadi kesalahan saat memproses gambar: ' + error.message
+      message: userMessage,
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });
