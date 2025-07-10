@@ -16,7 +16,7 @@ const pdfFiles = [
     id: 1,
     title: "JLPT N5 Practice Test",
     description: "Terdiri 188 Halaman gabungan dari soal dari tahun 2011-2021",
-    thumbnail: "/n5.png",
+    thumbnail: "https://ucarecdn.com/16c8c88d-16c0-411f-9ab9-95ce066b7abb/n5.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=1L4Uxw8dxHD_En-NHBq3zhiwDFI6V2poW",
     category: "N5"
   },
@@ -24,7 +24,7 @@ const pdfFiles = [
     id: 2,
     title: "JLPT N4 Practice Test",
     description: "Terdiri 129 Halaman gabungan soal dari tahun 2012-2023",
-    thumbnail: "/n4.png",
+    thumbnail: "https://ucarecdn.com/3c3fb7d8-7b45-484b-bc4c-a2ca42e8a54f/n4.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=1SzZr-E7VWJvMwLbk0evOtPmsOwkypqOh",
     category: "N4"
   },
@@ -32,7 +32,7 @@ const pdfFiles = [
     id: 3,
     title: "JLPT N3 Practice Test",
     description: "Coming soon....",
-    thumbnail: "/n3.png",
+    thumbnail: "https://ucarecdn.com/db0fd29c-b9b5-4281-a690-1892b6190863/n3.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=COMING_SOON",
     category: "N3"
   },
@@ -40,7 +40,7 @@ const pdfFiles = [
     id: 4,
     title: "Buku Modul Kontruksi",
     description: "Free download",
-    thumbnail: "/genba.png",
+    thumbnail: "https://ucarecdn.com/cb8f5e9c-fd02-498e-b757-0b71db23578b/genba.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=1ILrow21HipX_YGHzAnk6lchWH9PUdeby",
     category: "Genba"
   },
@@ -48,7 +48,7 @@ const pdfFiles = [
     id: 5,
     title: "Buku Modul SSW Pengolahan Makanan",
     description: "Free Download",
-    thumbnail: "/makanan.png",
+    thumbnail: "https://ucarecdn.com/241e8a5b-ef54-4a2f-9715-d325dc26192a/makanan.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=1A66wwXnJXikaDk43ftz5k6qVviStql_w",
     category: "Pengolahan Makanan"
   },
@@ -56,7 +56,7 @@ const pdfFiles = [
     id: 6,
     title: "Kanji Practice Book",
     description: "Buku latihan kanji untuk semua level",
-    thumbnail: "/kanji.png",
+    thumbnail: "https://ucarecdn.com/471aeeb7-5829-46cf-93ce-93d480dad37d/kanji.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=COMING_SOON",
     category: "Kanji"
   }
