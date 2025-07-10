@@ -210,14 +210,14 @@ app.post('/verify-image', async (req, res) => {
         let feedbackMessage = 'Oops! ';
         
         if (!hasRyzSaga) {
-          feedbackMessage += 'Username @ryzsaga tidak terdeteksi. ';
+          feedbackMessage += 'Kayanya kamu belum follow deh, follow dlu ya!';
         }
         
         if (!hasPesan && !hasExactName) {
-          feedbackMessage += 'Screenshot chat/pesan tidak terdeteksi. ';
+          feedbackMessage += 'pastikan gambarnya jelas ya';
         }
         
-        feedbackMessage += 'Pastikan screenshot menampilkan chat dengan @ryzsaga dengan jelas!';
+        feedbackMessage += 'kalo masih gabisa langsung dm!';
 
         res.json({
           success: false,
