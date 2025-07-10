@@ -1,12 +1,13 @@
 {
   "dependencies": {
     "express": "^5.1.0",
+    "form-data": "^4.0.3",
+    "node-fetch": "^3.3.2",
     "tesseract.js": "^6.0.1"
   },
   "name": "follow",
   "version": "1.0.0",
   "main": "server.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

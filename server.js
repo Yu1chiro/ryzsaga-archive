@@ -1,6 +1,8 @@
 const express = require('express');
 const Tesseract = require('tesseract.js');
 const path = require('path');
+const FormData = require('form-data');
+const fetch = require('node-fetch');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -117,32 +119,58 @@ app.post('/verify-image', async (req, res) => {
 
     console.log('Memproses gambar untuk file:', file.title);
 
-    const { data: { text } } = await Tesseract.recognize(imageData, 'ind', {
-      logger: m => console.log(m)
+    // 🔥 Menggunakan OCR.space API (GRATIS!)
+    const apiKey = 'K85870810288957'; // API key gratis
+    
+    const formData = new FormData();
+    formData.append('base64Image', imageData);
+    formData.append('apikey', apiKey);
+    formData.append('language', 'ind'); // Bahasa Indonesia
+    formData.append('isOverlayRequired', false);
+    formData.append('detectOrientation', false);
+    formData.append('scale', true);
+    formData.append('isTable', false);
+    formData.append('OCREngine', 2); // Engine terbaru
+
+    const response = await fetch('https://api.ocr.space/parse/image', {
+      method: 'POST',
+      body: formData
     });
 
-    console.log('Teks yang ditemukan:', text);
-    
-    const teksHasil = text.toLowerCase();
+    const ocrResult = await response.json();
 
-    // 🔍 Verifikasi: harus ada "pesan" DAN akun RYZ SAGA
-    const hasRyzSagaCaps = text.includes('RYZ SAGA');
-    const hasPesan = teksHasil.includes('pesan');
-    const hasRyzSaga = teksHasil.includes('@ryz') || teksHasil.includes('ryz saga') || teksHasil.includes('ryzsaga');
+    if (!ocrResult.IsErroredOnProcessing && ocrResult.ParsedResults && ocrResult.ParsedResults.length > 0) {
+      const text = ocrResult.ParsedResults[0].ParsedText;
+      console.log('Teks yang ditemukan:', text);
+      
+      const teksHasil = text.toLowerCase();
 
-    if (hasPesan && hasRyzSaga && hasRyzSagaCaps) {
-      res.json({
-        success: true,
-        message: 'Wah makasi ya sudh support akun ini! Ganbattene!',
-        downloadUrl: file.driveUrl,
-        fileName: file.title,
-        detectedText: text
-      });
+      // 🔍 Logic verifikasi kamu tetap sama
+      const hasRyzSagaCaps = text.includes('RYZ SAGA');
+      const hasPesan = teksHasil.includes('pesan');
+      const hasRyzSaga = teksHasil.includes('@ryz') || teksHasil.includes('ryz saga') || teksHasil.includes('ryzsaga');
+
+      if (hasPesan && hasRyzSaga && hasRyzSagaCaps) {
+        res.json({
+          success: true,
+          message: 'Wah makasi ya sudh support akun ini! Ganbattene!',
+          downloadUrl: file.driveUrl,
+          fileName: file.title,
+          detectedText: text
+        });
+      } else {
+        res.json({
+          success: false,
+          message: 'Oops! ternyata kamu belum memfollow atau akun tidak terdeteksi. Yuk follow dahulu!',
+          detectedText: text
+        });
+      }
+
     } else {
-      res.json({
+      console.error('OCR Error:', ocrResult);
+      res.status(500).json({
         success: false,
-        message: 'Oops! ternyata kamu belum memfollow atau akun tidak terdeteksi. Yuk follow dahulu!',
-        detectedText: text
+        message: 'Gagal memproses gambar: ' + (ocrResult.ErrorMessage || 'Unknown error')
       });
     }
 
@@ -154,7 +182,6 @@ app.post('/verify-image', async (req, res) => {
     });
   }
 });
-
 
 // Route untuk download file (redirect ke Google Drive)
 app.get('/download/:id', (req, res) => {
