@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download mode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+      50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+    }
+    
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes bounce-in {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .pulse-glow {
+      animation: pulse-glow 2s infinite;
+    }
+    
+    .spin-slow {
+      animation: spin-slow 3s linear infinite;
+    }
+    
+    .bounce-in {
+      animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .card-shadow {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .file-upload {
+      transition: all 0.3s ease;
+    }
+    
+    .file-upload:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .loading-dots {
+      display: inline-block;
+    }
+    
+    .loading-dots::after {
+      content: '';
+      animation: loading-dots 1.5s infinite;
+    }
+    
+    @keyframes loading-dots {
+      0%, 20% { content: ''; }
+      40% { content: '.'; }
+      60% { content: '..'; }
+      80%, 100% { content: '...'; }
+    }
+  </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center px-4">
+  
+  <div class="m-2 lg:m-5 bg-white/95 backdrop-blur-sm card-shadow rounded-3xl p-8 max-w-lg w-full space-y-6 text-center bounce-in">
+    
+    <!-- Header -->
+    <div class="space-y-3">
+      <h1 class="text-2xl font-bold text-gray-800">Btw Kamu sudah Follow Aku Belum?</h1>
+      <p class="text-gray-600">Cukup follow akun ini, ya. Kalau sudah, unggah bukti screenshot-nya di sini ya!</p>
+      
+      <!-- File Info -->
+      <div id="fileInfo" class="bg-blue-50 rounded-xl p-4 mt-4">
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <div class="text-left">
+            <h3 id="fileName" class="font-semibold text-gray-800">Loading...</h3>
+            <p id="fileDescription" class="text-sm text-gray-600">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Area -->
+    <div class="space-y-4">
+      <div class="file-upload border-2 border-dashed border-gray-300 rounded-xl p-6 hover:border-blue-400 transition-colors">
+        <input type="file" accept="image/*" id="imageInput" class="hidden" />
+        <label for="imageInput" class="cursor-pointer block">
+          <div class="space-y-2">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg mx-auto flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-700">Upload screenshoot</p>
+              <p class="text-xs text-gray-500">PNG, JPG, JPEG</p>
+            </div>
+          </div>
+        </label>
+      </div>
+      
+      <!-- Preview Image -->
+     <div id="imagePreview" class="hidden flex justify-center items-center">
+  <img id="previewImg" class="w-40 max-w-xs h-40 object-cover rounded-xl" />
+</div>
+
+    </div>
+
+    <!-- Process Button -->
+    <button id="processBtn" onclick="prosesVerifikasi()" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
+      <span id="btnText">Aku Sudh follow Senpai</span>
+    </button>
+
+    <!-- Loading Section -->
+    <div id="loadingSection" class="hidden space-y-4">
+      <div class="flex justify-center">
+        <div class="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full spin-slow"></div>
+      </div>
+      <div class="space-y-2">
+        <p class="text-sm font-medium text-gray-700">Tunggu sebentar ya<span class="loading-dots"></span></p>
+        <p class="text-xs text-gray-500">filemu lagi di proses</p>
+      </div>
+    </div>
+
+    <!-- Download Section -->
+    <div id="downloadSection" class="hidden space-y-4">
+      <div class="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center">
+        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <p class="text-sm font-medium text-green-600">Wah thankyou!</p>
+      <button onclick="downloadFile()" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 pulse-glow">
+        <span id="downloadText">Download PDF</span>
+      </button>
+    </div>
+
+    <!-- Back Button -->
+    <div class="pt-4 border-t border-gray-200">
+      <button onclick="goBack()" class="text-gray-600 hover:text-gray-800 text-sm font-medium transition-colors">
+        ← Kembali ke Daftar File
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    let currentFileId = null;
+    let downloadUrl = null;
+
+    // Ambil ID file dari URL
+    function getFileIdFromUrl() {
+      const path = window.location.pathname;
+      const matches = path.match(/\/verify\/(\d+)/);
+      return matches ? parseInt(matches[1]) : null;
+    }
+
+    // Load file info
+    async function loadFileInfo() {
+      currentFileId = getFileIdFromUrl();
+      
+      if (!currentFileId) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'ID file tidak valid!',
+          confirmButtonColor: '#ef4444'
+        }).then(() => {
+          window.location.href = '/';
+        });
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/files/${currentFileId}`);
+        const data = await response.json();
+
+        if (data.success) {
+          document.getElementById('fileName').textContent = data.file.title;
+          document.getElementById('fileDescription').textContent = data.file.description;
+          document.getElementById('downloadText').textContent = `Download ${data.file.title}`;
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (error) {
+        console.error('Error loading file info:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Gagal memuat informasi file!',
+          confirmButtonColor: '#ef4444'
+        }).then(() => {
+          window.location.href = '/';
+        });
+      }
+    }
+
+    // Preview gambar saat dipilih
+    document.getElementById('imageInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('previewImg').src = e.target.result;
+          document.getElementById('imagePreview').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    async function prosesVerifikasi() {
+      const fileInput = document.getElementById('imageInput');
+      const file = fileInput.files[0];
+      
+      if (!file) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops!',
+          text: 'Silakan upload gambar terlebih dahulu.',
+          confirmButtonColor: '#3b82f6'
+        });
+        return;
+      }
+
+      // Validasi ukuran file (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        Swal.fire({
+          icon: 'error',
+          title: 'File Terlalu Besar',
+          text: 'Ukuran file maksimal 5MB.',
+          confirmButtonColor: '#ef4444'
+        });
+        return;
+      }
+
+      // Validasi tipe file
+      if (!file.type.startsWith('image/')) {
+        Swal.fire({
+          icon: 'error',
+          title: 'File Tidak Valid',
+          text: 'Hanya file gambar yang diperbolehkan.',
+          confirmButtonColor: '#ef4444'
+        });
+        return;
+      }
+
+      // Show loading state
+      showLoading();
+
+      try {
+        // Convert file to base64
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+          const imageData = e.target.result;
+          
+          const response = await fetch('/verify-image', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+              imageData: imageData,
+              fileId: currentFileId 
+            })
+          });
+
+          const result = await response.json();
+          
+          hideLoading();
+
+          if (result.success) {
+            downloadUrl = result.downloadUrl;
+            Swal.fire({
+              icon: 'success',
+              title: 'Thankyou!',
+              text: result.message,
+              confirmButtonColor: '#10b981'
+            }).then(() => {
+              showDownloadSection();
+            });
+          } else {
+            Swal.fire({
+              icon: 'warning',
+              title: 'kamu belum follow nih hm...',
+              text: result.message,
+              confirmButtonColor: '#ef4444'
+            });
+          }
+        };
+
+        reader.onerror = function() {
+          hideLoading();
+          Swal.fire({
+            icon: 'error',
+            title: 'Terjadi Kesalahan',
+            text: 'Gagal membaca file gambar.',
+            confirmButtonColor: '#ef4444'
+          });
+        };
+
+        reader.readAsDataURL(file);
+
+      } catch (error) {
+        hideLoading();
+        Swal.fire({
+          icon: 'error',
+          title: 'Terjadi Kesalahan',
+          text: 'Gagal memproses gambar. Silakan coba lagi.',
+          confirmButtonColor: '#ef4444'
+        });
+      }
+    }
+
+    function showLoading() {
+      document.getElementById('processBtn').classList.add('hidden');
+      document.getElementById('loadingSection').classList.remove('hidden');
+      document.getElementById('downloadSection').classList.add('hidden');
+    }
+
+    function hideLoading() {
+      document.getElementById('processBtn').classList.remove('hidden');
+      document.getElementById('loadingSection').classList.add('hidden');
+    }
+
+    function showDownloadSection() {
+      document.getElementById('processBtn').classList.add('hidden');
+      document.getElementById('downloadSection').classList.remove('hidden');
+      document.getElementById('btnText').textContent = 'Verifikasi Selesai';
+    }
+
+    function downloadFile() {
+      if (downloadUrl) {
+        window.open(downloadUrl, '_blank');
+      } else {
+        window.open(`/download/${currentFileId}`, '_blank');
+      }
+    }
+
+    function goBack() {
+      window.location.href = '/';
+    }
+
+    // Load file info saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', loadFileInfo);
+  </script>
+
+</body>
+</html>

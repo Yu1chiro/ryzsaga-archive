@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download PDF JLPT - Gratis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'pastel-blue': {
+              100: '#e6f0ff',
+              200: '#b3d1ff',
+              300: '#80b3ff',
+              400: '#4d94ff',
+              500: '#1a75ff',
+              600: '#0066e6',
+              700: '#0052b3',
+            },
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-glow': 'pulse-glow 2s infinite',
+            'gradient-shift': 'gradient-shift 15s ease infinite',
+            'shimmer': 'shimmer 1.5s infinite',
+          },
+          keyframes: {
+            'float': {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            'pulse-glow': {
+              '0%, 100%': { 'box-shadow': '0 0 20px rgba(59, 130, 246, 0.4)' },
+              '50%': { 'box-shadow': '0 0 30px rgba(59, 130, 246, 0.8)' },
+            },
+            'gradient-shift': {
+              '0%': { 'background-position': '0% 50%' },
+              '50%': { 'background-position': '100% 50%' },
+              '100%': { 'background-position': '0% 50%' },
+            },
+            'shimmer': {
+              '0%': { 'background-position': '-200% 0' },
+              '100%': { 'background-position': '200% 0' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-pastel-blue-100 to-pastel-blue-200">
+  
+  <!-- Header -->
+  <header class="bg-white/30 backdrop-blur-md py-6 mb-8 shadow-sm">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <img src="icon.png" class="w-12 h-12 rounded-lg" alt="">
+          <div>
+            <h1 class="text-2xl font-bold text-pastel-blue-700">Ryzsaga Archive</h1>
+            <p class="text-pastel-blue-600/80 text-sm">Dukung Dengan Follow Akun Ini</p>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 pb-8">
+    
+    <!-- Hero Section -->
+  <section class="text-center mb-12">
+  <div class="bg-white/30 backdrop-blur-md rounded-3xl p-8 mb-8 shadow-md max-w-4xl mx-auto">
+    <!-- Image Placeholder - Replace with your actual image -->
+    <div class="flex justify-center mb-6">
+      <img src="icon.png" alt="Ryzsaga" class="w-32 h-32 rounded-full object-cover border-4 border-pastel-blue-300">
+    </div>
+    
+    <h2 class="text-2xl font-bold text-pastel-blue-700 mb-4">Ryzsaga・熊本県・福岡
+    </h2>
+    
+    <p class="text-pastel-blue-600/90 text-sm mb-6 mx-auto max-w-2xl">
+      Hallo! Kenalin aku Ryzsaga disini aku membagikan file archive dan resource gratis untuk kalian yg lagi belajar bahasa jepang.
+      source bersifat free download dukung aku dengan cara memfollow akun tiktokk ku ya! <br> ありがとうございます！
+    </p>
+    
+    <div class="flex justify-center items-center space-x-6 text-pastel-blue-600/80">
+      <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        <span>All Resources</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span>Alwys Updated</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Loading Skeleton -->
+    <div id="loadingSkeleton" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white/50 rounded-2xl p-6">
+        <div class="h-32 bg-pastel-blue-200/50 rounded-xl mb-4 animate-pulse"></div>
+        <div class="h-6 bg-pastel-blue-200/50 rounded mb-2 animate-pulse"></div>
+        <div class="h-4 bg-pastel-blue-200/50 rounded mb-4 animate-pulse"></div>
+        <div class="h-10 bg-pastel-blue-200/50 rounded animate-pulse"></div>
+      </div>
+      <div class="bg-white/50 rounded-2xl p-6">
+        <div class="h-32 bg-pastel-blue-200/50 rounded-xl mb-4 animate-pulse"></div>
+        <div class="h-6 bg-pastel-blue-200/50 rounded mb-2 animate-pulse"></div>
+        <div class="h-4 bg-pastel-blue-200/50 rounded mb-4 animate-pulse"></div>
+        <div class="h-10 bg-pastel-blue-200/50 rounded animate-pulse"></div>
+      </div>
+      <div class="bg-white/50 rounded-2xl p-6">
+        <div class="h-32 bg-pastel-blue-200/50 rounded-xl mb-4 animate-pulse"></div>
+        <div class="h-6 bg-pastel-blue-200/50 rounded mb-2 animate-pulse"></div>
+        <div class="h-4 bg-pastel-blue-200/50 rounded mb-4 animate-pulse"></div>
+        <div class="h-10 bg-pastel-blue-200/50 rounded animate-pulse"></div>
+      </div>
+    </div>
+
+    <!-- PDF Cards Grid -->
+    <div id="pdfGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+      <!-- Cards will be populated by JavaScript -->
+    </div>
+
+    <!-- No Files Message -->
+    <div id="noFiles" class="text-center py-12 hidden">
+      <div class="bg-white/30 backdrop-blur-md rounded-2xl p-8 max-w-md mx-auto shadow-sm">
+        <div class="w-16 h-16 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+          <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-pastel-blue-700 mb-2">Tidak Ada File</h3>
+        <p class="text-pastel-blue-600/80">Belum ada file yang tersedia saat ini.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white/30 backdrop-blur-md py-6 mt-12 shadow-sm">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-pastel-blue-600/80">© Ryzsaga Archive 2025 | Dev by Yui</p>
+    </div>
+  </footer>
+
+  <script>
+    // Fungsi untuk memuat daftar file PDF
+    async function loadPDFFiles() {
+      try {
+        const response = await fetch('/api/files');
+        const data = await response.json();
+        
+        // Sembunyikan loading skeleton
+        document.getElementById('loadingSkeleton').classList.add('hidden');
+        
+        if (data.success && data.files.length > 0) {
+          displayPDFCards(data.files);
+        } else {
+          document.getElementById('noFiles').classList.remove('hidden');
+        }
+      } catch (error) {
+        console.error('Error loading PDF files:', error);
+        document.getElementById('loadingSkeleton').classList.add('hidden');
+        document.getElementById('noFiles').classList.remove('hidden');
+      }
+    }
+
+    // Fungsi untuk menampilkan cards PDF
+    function displayPDFCards(files) {
+      const grid = document.getElementById('pdfGrid');
+      grid.innerHTML = '';
+      
+      files.forEach(file => {
+        const card = createPDFCard(file);
+        grid.appendChild(card);
+      });
+      
+      grid.classList.remove('hidden');
+    }
+
+    // Fungsi untuk membuat card PDF
+    function createPDFCard(file) {
+      const card = document.createElement('div');
+      card.className = 'bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1';
+      
+      card.innerHTML = `
+        <div class="relative mb-4">
+          <img src="${file.thumbnail}" alt="${file.title}" class="w-full h-32 object-cover rounded-xl">
+          <div class="absolute top-2 right-2 bg-gradient-to-r from-pastel-blue-500 to-pastel-blue-600 text-white px-2 py-1 rounded-lg text-xs font-semibold">
+            ${file.category}
+          </div>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-800 mb-2">${file.title}</h3>
+        <p class="text-gray-600 text-sm mb-4">${file.description}</p>
+        
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-1 text-yellow-500">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span class="text-sm text-gray-600">Gratis</span>
+          </div>
+          
+          <button onclick="startVerification(${file.id})" class="bg-gradient-to-r from-pastel-blue-500 to-pastel-blue-600 hover:from-pastel-blue-600 hover:to-pastel-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
+            Download
+          </button>
+        </div>
+      `;
+      
+      return card;
+    }
+
+    // Fungsi untuk memulai verifikasi
+    function startVerification(fileId) {
+      // Redirect ke halaman verifikasi dengan ID file
+      window.location.href = `/verify/${fileId}`;
+    }
+
+    // Muat file PDF saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', loadPDFFiles);
+  </script>
+
+</body>
+</html>
