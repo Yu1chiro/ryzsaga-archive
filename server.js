@@ -40,7 +40,8 @@ const pdfFiles = [
     title: "Buku Modul Kontruksi",
     description: "Free download",
     thumbnail: "https://ucarecdn.com/cb8f5e9c-fd02-498e-b757-0b71db23578b/genba.png",
-    driveUrl: "https://drive.google.com/uc?export=download&id=1ILrow21HipX_YGHzAnk6lchWH9PUdeby",
+    driveUrl: "https://drive.google.com/uc?export=download&id=COMING_SOON",
+    // driveUrl: "https://drive.google.com/uc?export=download&id=1ILrow21HipX_YGHzAnk6lchWH9PUdeby",
     category: "Genba"
   },
   {
@@ -48,7 +49,8 @@ const pdfFiles = [
     title: "Buku Modul SSW Pengolahan Makanan",
     description: "Free Download",
     thumbnail: "https://ucarecdn.com/241e8a5b-ef54-4a2f-9715-d325dc26192a/makanan.png",
-    driveUrl: "https://drive.google.com/uc?export=download&id=1A66wwXnJXikaDk43ftz5k6qVviStql_w",
+    driveUrl: "https://drive.google.com/uc?export=download&id=COMING_SOON",
+    // driveUrl: "https://drive.google.com/uc?export=download&id=1A66wwXnJXikaDk43ftz5k6qVviStql_w",
     category: "Pengolahan Makanan"
   },
   {
@@ -217,7 +219,7 @@ app.post('/verify-image', async (req, res) => {
           feedbackMessage += 'pastikan gambarnya jelas ya';
         }
         
-        feedbackMessage += 'kalo masih gabisa langsung dm!';
+        feedbackMessage += 'kalo masih gabisa download langsung dm ya!';
 
         res.json({
           success: false,
