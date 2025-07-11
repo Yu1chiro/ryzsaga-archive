@@ -120,7 +120,7 @@ app.post('/verify-image', async (req, res) => {
     // console.log('Memproses gambar untuk file:', file.title);
 
     // 🔥 Menggunakan Gemini API untuk analisis gambar
-    const GEMINI_API_KEY = 'AIzaSyA2-TrJpGriUVGV9aP3Ft7OURJ2bDe0_n8'; // Ganti dengan API key Anda
+    const GEMINI_API_KEY = 'AIzaSyAN5ptWhQ7xjBbHMCCqWJBUsw5RdQDfBYQ'; // Ganti dengan API key Anda
     
     // Hapus prefix data:image/...;base64, dari imageData
     const base64Image = imageData.replace(/^data:image\/[^;]+;base64,/, '');
