@@ -40,8 +40,7 @@ const pdfFiles = [
     title: "Buku Modul Kontruksi",
     description: "Free download",
     thumbnail: "https://ucarecdn.com/cb8f5e9c-fd02-498e-b757-0b71db23578b/genba.png",
-    driveUrl: "https://drive.google.com/uc?export=download&id=COMING_SOON",
-    // driveUrl: "https://drive.google.com/uc?export=download&id=1ILrow21HipX_YGHzAnk6lchWH9PUdeby",
+    driveUrl: "https://drive.google.com/uc?export=download&id=1ILrow21HipX_YGHzAnk6lchWH9PUdeby",
     category: "Genba"
   },
   {
@@ -49,8 +48,7 @@ const pdfFiles = [
     title: "Buku Modul SSW Pengolahan Makanan",
     description: "Free Download",
     thumbnail: "https://ucarecdn.com/241e8a5b-ef54-4a2f-9715-d325dc26192a/makanan.png",
-    driveUrl: "https://drive.google.com/uc?export=download&id=COMING_SOON",
-    // driveUrl: "https://drive.google.com/uc?export=download&id=1A66wwXnJXikaDk43ftz5k6qVviStql_w",
+    driveUrl: "https://drive.google.com/uc?export=download&id=1A66wwXnJXikaDk43ftz5k6qVviStql_w",
     category: "Pengolahan Makanan"
   },
   {
@@ -60,7 +58,48 @@ const pdfFiles = [
     thumbnail: "https://ucarecdn.com/471aeeb7-5829-46cf-93ce-93d480dad37d/kanji.png",
     driveUrl: "https://drive.google.com/uc?export=download&id=COMING_SOON",
     category: "Kanji"
-  }
+  },
+  {
+    id: 7,
+    title: "List Kosakata Stasiun",
+    description: "free",
+    thumbnail: "https://i.pinimg.com/736x/75/ea/a1/75eaa1b723ff139c3cbc4ffc5537b795.jpg",
+    driveUrl: "https://download1655.mediafire.com/aa9rg0unwoogGR0ITqiRc1wiTDvWCJDrBXMl9H24boZdM8RRsf3POsa_bBulBpINqhnozkpkTMsEaTa5ql3txy-9rpiTDCJTi6ORvTrTdH7cfBWwawYpaLONWqkO_ufXQtlHZm4bni1Jz1FnxrnKsxRtaBpiimzZMXjCBauqpIeiXOY/gewqqj5devea1ew/LIST-KOSAKATA-STASIUN.pdf",
+    category: "Kosakata"
+  },
+  // {
+  //   id: ,
+  //   title: "",
+  //   description: "free",
+  //   thumbnail: "",
+  //   driveUrl: "",
+  //   category: ""
+  // },
+  // {
+  //   id: ,
+  //   title: "",
+  //   description: "free",
+  //   thumbnail: "",
+  //   driveUrl: "",
+  //   category: ""
+  // },
+  // {
+  //   id: ,
+  //   title: "",
+  //   description: "free",
+  //   thumbnail: "",
+  //   driveUrl: "",
+  //   category: ""
+  // },
+  // {
+  //   id: ,
+  //   title: "",
+  //   description: "free",
+  //   thumbnail: "",
+  //   driveUrl: "",
+  //   category: ""
+  // },
+ 
 ];
 
 // Route untuk mendapatkan daftar file PDF
