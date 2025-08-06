@@ -67,14 +67,14 @@ const pdfFiles = [
     driveUrl: "https://download1655.mediafire.com/aa9rg0unwoogGR0ITqiRc1wiTDvWCJDrBXMl9H24boZdM8RRsf3POsa_bBulBpINqhnozkpkTMsEaTa5ql3txy-9rpiTDCJTi6ORvTrTdH7cfBWwawYpaLONWqkO_ufXQtlHZm4bni1Jz1FnxrnKsxRtaBpiimzZMXjCBauqpIeiXOY/gewqqj5devea1ew/LIST-KOSAKATA-STASIUN.pdf",
     category: "Kosakata"
   },
-  // {
-  //   id: ,
-  //   title: "",
-  //   description: "free",
-  //   thumbnail: "",
-  //   driveUrl: "",
-  //   category: ""
-  // },
+  {
+    id: 8,
+    title: "List Kosakata Tentang Rumah Sakit",
+    description: "free",
+    thumbnail: "https://i.pinimg.com/736x/d3/d4/fe/d3d4fefdc54aedd51959fac98421286b.jpg",
+    driveUrl: "https://download1530.mediafire.com/19r1ab04z1mgFS1UBU9Smpkw2smyzrWAD4VZR140WJuc6g14fR3xEr5PwXOfuey16st0xPfm740C-wGkEptWlddy69gO_1ZRQmbyZ8c0XjqTrmqXpW-VEipVFklxhGRR5xTVR8uwWQ2QIk1Dodc_drB4slgASn4H0AazUUyRRBc9QjQ/4agdj4uoiqq6cm9/KOSAKATA+TENTANG+RUMAH+SAKIT.pdf",
+    category: "Kosakata"
+  }
   // {
   //   id: ,
   //   title: "",
