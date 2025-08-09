@@ -74,15 +74,15 @@ const pdfFiles = [
     thumbnail: "https://i.pinimg.com/736x/d3/d4/fe/d3d4fefdc54aedd51959fac98421286b.jpg",
     driveUrl: "https://download1530.mediafire.com/19r1ab04z1mgFS1UBU9Smpkw2smyzrWAD4VZR140WJuc6g14fR3xEr5PwXOfuey16st0xPfm740C-wGkEptWlddy69gO_1ZRQmbyZ8c0XjqTrmqXpW-VEipVFklxhGRR5xTVR8uwWQ2QIk1Dodc_drB4slgASn4H0AazUUyRRBc9QjQ/4agdj4uoiqq6cm9/KOSAKATA+TENTANG+RUMAH+SAKIT.pdf",
     category: "Kosakata"
+  },
+  {
+    id: 9,
+    title: "List Kosakata Rambu Lalulintas di Jepang",
+    description: "free",
+    thumbnail: "https://i.pinimg.com/736x/7c/30/86/7c3086314726772f29713cdcd0b75b41.jpg",
+    driveUrl: "https://download1590.mediafire.com/1kjdi0fqdasgALV6Wi_X31BZFQ9S6skivjFhmqcObIOX_k_4e2mijza_lJeczVRCLJHj_sSbRP8UMVcvoVG-yTOucqAiqHkqaH-6ul1jLtg5pVOdoaxfYMWEn5uNMpnTTawLLbOfa3FFiTIs5Q-d8VsmFneh4v-RsK0Mrs-9cT_LP0bL/076di1jyralub88/LIST-KOSAKATA-RAMBU-JALAN.pdf",
+    category: "Kosakata"
   }
-  // {
-  //   id: ,
-  //   title: "",
-  //   description: "free",
-  //   thumbnail: "",
-  //   driveUrl: "",
-  //   category: ""
-  // },
   // {
   //   id: ,
   //   title: "",
