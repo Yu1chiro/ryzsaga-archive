@@ -82,15 +82,15 @@ const pdfFiles = [
     thumbnail: "https://i.pinimg.com/736x/7c/30/86/7c3086314726772f29713cdcd0b75b41.jpg",
     driveUrl: "https://download1590.mediafire.com/1kjdi0fqdasgALV6Wi_X31BZFQ9S6skivjFhmqcObIOX_k_4e2mijza_lJeczVRCLJHj_sSbRP8UMVcvoVG-yTOucqAiqHkqaH-6ul1jLtg5pVOdoaxfYMWEn5uNMpnTTawLLbOfa3FFiTIs5Q-d8VsmFneh4v-RsK0Mrs-9cT_LP0bL/076di1jyralub88/LIST-KOSAKATA-RAMBU-JALAN.pdf",
     category: "Kosakata"
+  },
+  {
+    id:10 ,
+    title: "Kosakata Bahasa Jepang Terkait Pemerintahan",
+    description: "free",
+    thumbnail: "https://i.pinimg.com/736x/d3/4c/ad/d34cad45a6f6271c92b08caa2e9bd44c.jpg",
+    driveUrl: "https://www.mediafire.com/file/duvnh5tr96yz0pe/KOSAKATA+TERKAIT+PEMERINTAH.pdf/file",
+    category: "Kosakata"
   }
-  // {
-  //   id: ,
-  //   title: "",
-  //   description: "free",
-  //   thumbnail: "",
-  //   driveUrl: "",
-  //   category: ""
-  // },
   // {
   //   id: ,
   //   title: "",
